@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from 'react'
 
 const ShowHide = () => {
-  const [text, setText] = useState('')
-  const [isError, setIsError] = useState(false)
+  const [show, setShow] = useState(false)
 
   return (
-    <div>
-      <h1>{text || 'john doe'}</h1>
-      <button className='btn' onClick={() => setIsError(!isError)}>
+    <>
+      <button className='btn' onClick={() => setShow(!show)}>
         toggle error
       </button>
-      {isError && <h1>Error...</h1>}
-      {isError ? (
-        <p>there is an error...</p>
-      ) : (
-        <div>
-          <h2>there is no error</h2>
-        </div>
-      )}
+      {show && <Item />}
+    </>
+  )
+}
+
+const Item = () => {
+  const [size, setSize] = useState(window.innerWidth)
+
+  const checkSize = () => {
+    setSize(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', checkSize)
+
+    return () => {
+      window.removeEventListener('resize', checkSize)
+    }
+  }, [])
+
+  return (
+    <div style={{ marginTop: '2rem' }}>
+      <h1>window</h1>
+      <h2>size : {size} px</h2>
     </div>
   )
 }
