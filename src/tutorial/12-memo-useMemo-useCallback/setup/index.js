@@ -28,6 +28,7 @@ const Index = () => {
 
   const addTocart = useCallback(() => {
     setCart((prevCart) => prevCart + 1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart])
 
   const mostExpensive = useMemo(
